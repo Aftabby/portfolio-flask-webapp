@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template
+from app.projects.ds_salary.utils import *
 
 ds_salary_bp = Blueprint(
     "ds_salary",
@@ -10,6 +11,16 @@ ds_salary_bp = Blueprint(
 )
 
 
-@ds_salary_bp.route("/")
+@ds_salary_bp.route("/", methods=["GET"])
 def index():
-    return render_template("ds_salary_index.html")
+    sample_df = load_sample()
+    sample_html = sample_df.to_html(index=False)
+
+    context = {
+        "sample_table": sample_html,
+        "columns": sample_df.shape[1],
+        "rows": 742,
+        "graph_json": graph(),
+    }
+
+    return render_template("project1.html", context=context)
