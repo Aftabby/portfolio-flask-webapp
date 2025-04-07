@@ -110,9 +110,13 @@
     text-align: justify;
     padding: 3rem;
   }
+  section {
+    margin: 0 4%;
+    padding-bottom: 4%;
+  }
   nav {
     justify-content: space-between;
-    margin: 0 5% 5%;
+    margin: 0 5% 1%;
   }
 }
 
@@ -120,9 +124,6 @@
   .section__txt-container {
     text-align: justify;
     padding: 3rem;
-  }
-  section {
-    margin: 0 5% 5%;
   }
 }
 
@@ -145,9 +146,6 @@
   }
   #profile {
     height: auto;
-  }
-  .first-look {
-    height: 95vh;
   }
   #about {
     padding: 0rem;

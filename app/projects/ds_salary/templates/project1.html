@@ -1,4 +1,23 @@
-{% extends "layout.html" %}
+<!--
+Using layout templates in Flask (Blueprint-based):
+
+1. To use a shared layout (from app/shared/templates/layout.html):
+   {#% extends 'layout.html' %#}
+
+2. To use a project-specific layout (from app/projects/ds-salary/templates/layout.html):
+   {# % extends 'layout.html' % #}
+
+Note:
+- Flask looks in the current blueprint's template folder first.
+- If two templates have the same name, the one in the current blueprint will be used.
+- To avoid naming conflicts, give shared layouts unique names like 'shared_layout.html'.
+
+Also:
+- Use {#% include 'filename.html' %#} for partials like navbars, headers, or footers.
+- Remove the '#' before using jinja syntax
+-->
+
+{% extends "shared_layout1.html" %}
 
 {% block title %}
     Project - Aftabby

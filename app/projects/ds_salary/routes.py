@@ -7,7 +7,7 @@ ds_salary_bp = Blueprint(
     template_folder="templates",
     static_folder="static",
     url_prefix="/ds-salary",
-    static_url_path="/ds-salary/static",
+    static_url_path="/ds_salary/static",
 )
 
 

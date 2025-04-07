@@ -534,6 +534,20 @@ section {
 .footer-nav {
   justify-content: space-around;
 }
+.motto {
+  font-size: 0.5rem;
+  color: rgb(72, 72, 72);
+}
+#hero {
+  display: block;
+  align-items: center;
+  background: rgb(250, 250, 250);
+  text-align: center;
+}
+h1 {
+  font-size: 2rem;
+  padding-bottom: 0.5rem;
+}
 /*!  Added by me */
 /* ! TEST PURPOSE */
 /*% Removed after testing */
