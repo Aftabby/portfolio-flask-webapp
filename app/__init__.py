@@ -2,7 +2,7 @@
 # This file initializes the Flask application and registers the blueprints for different routes.
 # It serves as the entry point for the application.
 
-from flask import Flask
+from flask import Flask, render_template
 
 
 def create_app():
@@ -26,10 +26,16 @@ def create_app():
     for blueprint in project_blueprints:
         app.register_blueprint(blueprint)
 
+    # % For 404 Error Page
+    # Custom error handler for 404 errors
+    @app.errorhandler(404)
+    def not_found(error):
+        return render_template("404.html"), 404
+
     return app
 
 
-""" #% Explanation:
+""" #@ Explanation:
     1. Why register shared_bp in app/__init__.py?
         Even though you might not use any specific routes from shared_bp, registering the blueprint does a few important things:
         Template & Static File Lookup: It makes the shared blueprint's template and static folders available to Flask's lookup mechanism. This means that when you reference a file (for example, using url_for('shared.static', filename='...') or extending a template), Flask knows where to find them.
