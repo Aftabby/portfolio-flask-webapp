@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aftabby - Portfolio</title>
+    <link rel="icon" href="{{ url_for('home.static', filename='images/favicon.png') }}" type="image/png" />
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('home.static', filename='css/mediaqueries.css') }}" />
+  </head>
+  <body>
+    <div class="first-look">
+      <nav id="desktop-nav">
+        <div class="logo"><a href="https://www.aftabby.com">Aftabby</a></div>
+        <div>
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <nav id="hamburger-nav">
+        <div class="logo"><a href="https://www.aftabby.com">Aftabby</a></div>
+        <div class="hamburger-menu">
+          <div class="hamburger-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="menu-links">
+            <li><a href="#about" onclick="toggleMenu()">About</a></li>
+            <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+            <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+          </div>
+        </div>
+      </nav>
+      <section id="profile">
+        <div class="section__pic-container">
+          <img src="{{ url_for('home.static', filename='images/profile-pic.png') }}" alt="Aftab Uddin profile picture" />
+        </div>
+        <div class="section__text">
+          <p class="section__text__p1">Hello, I'm</p>
+          <h1 class="title">Aftab Uddin</h1>
+          <p class="section__text__p2">Data Scientist</p>
+          <div class="btn-container">
+            <button class="btn btn-color-2">
+              <a
+                href="{{ url_for('home.static', filename='pdf/Aftab-Uddin-Data-Scientist-Resume.pdf') }}"
+                download="Aftab-Uddin-Data-Scientist-Resume.pdf"
+              >
+                Download CV
+              </a>
+            </button>
+            <button class="btn btn-color-1" onclick="location.href='#contact'">
+              Contact Info
+            </button>
+          </div>
+          <div id="socials-container">
+            <a
+              href="https://www.linkedin.com/in/aftabby/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="{{ url_for('home.static', filename='images/linkedin.png') }}"
+                alt="My LinkedIn profile"
+                class="icon"
+              />
+            </a>
+            <a
+              href="https://github.com/Aftabby"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="{{ url_for('home.static', filename='images/github.png') }}"
+                alt="My Github profile"
+                class="icon"
+              />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section id="about">
+      <p class="section__text__p1">Get To Know More</p>
+      <h1 class="title about-me-title">About Me</h1>
+      <div class="section-container">
+        <div class="text-container section__txt-container">
+          <p>
+            A year-long exposure in Data Science and Machine Learning has
+            provided me with a new lens of looking at things, particularly,
+            owing to my background in Electrical and Electronics Engineering.
+            The ability to make predictions with machine learning, using data to
+            predict outcomes, turns raw data into value and then preiction
+            excites me. I am passionate about drawing value from data, helping
+            us to understand the world in ways we did not notice before. To see
+            this passion in action, please navigate to my project showcase
+            below. Thanks!
+          </p>
+        </div>
+        <div class="about-details-container">
+          <div class="about-containers">
+            <div class="details-container">
+              <img
+                src="{{ url_for('home.static', filename='images/experience.png') }}"
+                alt="Experience icon"
+                class="icon"
+              />
+              <h3>Experience</h3>
+              <p>
+                1+ years <br />Data Science <br />
+                Machine Learning
+              </p>
+            </div>
+            <div class="details-container">
+              <img
+                src="{{ url_for('home.static', filename='images/education.png') }}"
+                alt="Education icon"
+                class="icon"
+              />
+              <h3>Education</h3>
+              <p>Diploma in EE<br />B.Sc. in EEE</p>
+            </div>
+          </div>
+          <div class="about-containers">
+            <div class="details-container">
+              <img src="{{ url_for('home.static', filename='images/skills.png') }}" alt="Skills icon" class="icon" />
+              <h3>Skills</h3>
+              <div class="skills-container">
+                <p class="each-category">
+                  <span class="tech-category">Languages: </span>Python, SQL,
+                  Bash
+                </p>
+                <p class="each-category">
+                  <span class="tech-category">Databases: </span>MySQL, SQLite3
+                </p>
+                <p class="each-category">
+                  <span class="tech-category"
+                    >Data Manipulation & Analysis: </span
+                  >Pandas, Numpy
+                </p>
+                <p class="each-category">
+                  <span class="tech-category">Cloud & DevOps: </span>Azure,
+                  Docker, Git, GitHub
+                </p>
+
+                <p class="each-category">
+                  <span class="tech-category">Data Visualization: </span
+                  >Matplotlib, Seaborn, Plotly, Power BI
+                </p>
+                <p class="each-category">
+                  <span class="tech-category">Machine Learning: </span
+                  >Scikit-Learn, TensorFlow, Keras
+                </p>
+                <p class="each-category">
+                  <span class="tech-category">Web Development: </span>HTML, CSS,
+                  Bootstrap, Flask
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <img
+        src=".{{ url_for('home.static', filename='images/arrow.png') }}"
+        alt="Arrow icon"
+        class="icon arrow"
+        onclick="location.href='#contact'"
+      />
+    </section>
+    <section id="contact">
+      <p class="section__text__p1">Get in Touch</p>
+      <h1 class="title">Contact Me</h1>
+      <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+          <a class="contact-link" href="mailto:mail@aftabby.com">
+            <img
+              src="{{ url_for('home.static', filename='images/email.png') }}"
+              alt="Email icon"
+              class="icon contact-icon email-icon"
+            />
+            <p>mail@aftabby.com</p></a
+          >
+        </div>
+        <div class="contact-info-container">
+          <a
+            class="contact-link"
+            href="https://www.linkedin.com/in/aftabby/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img
+              src="{{ url_for('home.static', filename='images/linkedin.png') }}"
+              alt="LinkedIn icon"
+              class="icon contact-icon"
+            />
+            <p>LinkedIn</p></a
+          >
+        </div>
+      </div>
+    </section>
+    <section id="projects">
+      <p class="section__text__p1">Browse My Recent</p>
+      <h1 class="title">Projects</h1>
+      <div class="experience-details-container">
+        <div class="about-containers project-container">
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-1.png') }}"
+                alt="Project 1"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">
+              DS Job Salary Prediction
+            </h2>
+
+            <p class="intro">
+              Scraping raw data to building random forest model..
+            </p>
+            <p class="tag">
+              Python, Numpy, Pandas, Plotly, Power BI, Scikit-learn
+            </p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/Aftabby/ds-salary-project', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.aftabby.com/ds-salary/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-2.png') }}"
+                alt="Project 2"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Two</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-3.png') }}"
+                alt="Project 3"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Three</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-1.png') }}"
+                alt="Project 1"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project One</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-2.png') }}"
+                alt="Project 2"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Two</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-3.png') }}"
+                alt="Project 3"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Three</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+          <div class="details-container color-container">
+            <div class="article-container">
+              <img
+                src="{{ url_for('home.static', filename='images/project-2.png') }}"
+                alt="Project 2"
+                class="project-img"
+              />
+            </div>
+            <h2 class="experience-sub-title project-title">Project Two</h2>
+
+            <p class="intro">
+              Scraping Data from Glassdoor to estimate salaries of ...
+            </p>
+            <p class="tag">Python, SQL, Power BI</p>
+
+            <div class="btn-container">
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Github
+              </button>
+              <button
+                class="btn btn-color-2 project-btn btn-reduced"
+                onclick="window.open('https://www.github.com/', '_blank');"
+              >
+                Details
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <nav>
+        <div class="nav-links-container">
+          <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; 2025 Aftabby. All Rights Reserved.</p>
+    </footer>
+    <script src="{{ url_for('home.static', filename='js/script.js') }}"></script>
+  </body>
+</html>
