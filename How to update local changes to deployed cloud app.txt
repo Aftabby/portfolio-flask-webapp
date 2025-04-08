@@ -1,0 +1,83 @@
+To implement changes in your files, **rebuild the Docker image**, and deploy the updated image to **Azure Container Apps**, you’ll follow these steps:
+
+---
+
+### 🔄 Step-by-step Process
+
+#### 1. **Make Changes Locally**
+
+- Modify the files in your local development environment (Flask app, templates, Dockerfile, etc.).
+  
+---
+
+#### 2. **Rebuild the Docker Image**
+
+After you’ve made your changes, rebuild the Docker image using the same **`docker build`** command, which will automatically include all your new changes:
+
+```bash
+docker build -t yourusername/your-app-name .
+```
+
+This will rebuild the Docker image locally with all your updated code. The tag (`yourusername/your-app-name`) should match the name you used when pushing the image to Docker Hub earlier.
+
+---
+
+#### 3. **Push the New Image to Docker Hub (or other container registry)**
+
+Once the image is built, push it to **Docker Hub** or whichever container registry you are using (if it’s private, make sure you’re logged in).
+
+```bash
+docker push yourusername/your-app-name
+```
+
+This will upload the newly built image to Docker Hub (or your chosen container registry). Make sure it uses the same tag (`yourusername/your-app-name`) as before so Azure knows to pull the updated image.
+
+---
+
+#### 4. **Update Azure Container App**
+
+Now that your new Docker image is pushed to Docker Hub, you can update the Azure Container App to use the latest image.
+
+You can either use the **Azure Portal**, **Azure CLI**, or **Bicep/ARM** templates. Here’s how to do it via Azure CLI:
+
+```bash
+az containerapp update \
+  --name my-portfolio-app \
+  --resource-group my-portfolio-rg \
+  --image yourusername/your-app-name
+```
+
+This command will tell Azure to pull the latest Docker image from Docker Hub (or your container registry) and replace the currently running container with the new one.
+
+---
+
+#### 5. **Confirm the Update**
+
+Once the image is updated, you can confirm by:
+
+1. Visiting the app via your custom domain.
+2. Checking the **Azure Portal** under your **Container App** > **Logs** to see the most recent activity or errors (if any).
+
+---
+
+### 📢 **Additional Tip**:
+
+If you’re deploying **multiple updates** in the future, you can tag the Docker image with **versioning** for better management, e.g.,
+
+```bash
+docker build -t yourusername/your-app-name:v2 .
+docker push yourusername/your-app-name:v2
+```
+
+Then, update your Azure Container App to pull the new version:
+
+```bash
+az containerapp update \
+  --name my-portfolio-app \
+  --resource-group my-portfolio-rg \
+  --image yourusername/your-app-name:v2
+```
+
+---
+
+** MAKE SURE TO REPLACE THE PLACEHOLDER with actual name IN THE BASH CODE **

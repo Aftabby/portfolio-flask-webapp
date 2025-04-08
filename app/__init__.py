@@ -2,11 +2,19 @@
 # This file initializes the Flask application and registers the blueprints for different routes.
 # It serves as the entry point for the application.
 
-from flask import Flask, render_template
+from flask import Flask, request, redirect, render_template
 
 
 def create_app():
     app = Flask(__name__)
+
+    # % Redirect non-www to www globally for all routes
+    @app.before_request
+    def redirect_non_www():
+        if request.host == "aftabby.com":
+            return redirect(
+                request.url.replace("aftabby.com", "www.aftabby.com"), code=301
+            )
 
     # % For Home Page
     from app.home.routes import (
