@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import json
+import os
 import plotly.graph_objects as go
 import plotly.express as px
 from plotly.subplots import make_subplots
@@ -13,13 +14,21 @@ def main():
     pass
 
 
-def load_sample(path="./static/data/cleaned_sleep_dataset.csv"):
+def load_sample():
+    """
+    Load the sample data from the specified path.
+    """
+    path = os.path.join(
+        os.path.dirname(__file__), "static", "data", "cleaned_sleep_dataset.csv"
+    )
+    df = pd.read_csv(path)
     df = pd.read_csv(path)
     df["Sleep Disorder"] = df["Sleep Disorder"].fillna("None")
     return df
 
 
-def load_compare_df(path="./static/data/compare_df.csv"):
+def load_compare_df():
+    path = os.path.join(os.path.dirname(__file__), "static", "data", "compare_df.csv")
     df = pd.read_csv(path)
     return df
 
@@ -329,7 +338,7 @@ def graph():
             x=x_range,
             y=predicted_kde(x_range),
             mode="lines",
-            name="Fitted Values",
+            name="Predicted Values",
             line=dict(color="blue"),
         )
     )
@@ -380,7 +389,7 @@ def graph():
     )
 
     fig6.update_layout(
-        title="Actual vs Predicted Values for Sleep Disorder",
+        title="Decision Tree: Actual vs Predicted Values for Sleep Disorder",
         xaxis_title="Sleep Disorder",
         yaxis_title="Proportion of Patients",
         template="plotly_white",
@@ -392,13 +401,14 @@ def graph():
     return graph_json
 
 
-def load_model(path="./models/trained_models.pickle"):
+def load_model():
     """
     I predicted using the model and saved the data as compare_df already to save cloud resources.
     Alternatively, we can load the model and predict the data again.
     I saved the models as a pickle file in "models" folder.
     Will use this to implement API Later.
     """
+    path = os.path.join(os.path.dirname(__file__), "models", "trained_models.pickle")
     pass
 
 

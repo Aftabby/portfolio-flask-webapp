@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Loop through the remaining graphs (2nd to 4th) and set their layout properties
     for (let i = 1; i <= 3; i++) {
-      graphData[i].layout.width = containerWidth;
       graphData[i].layout.height = 250;
       graphData[i].layout.legend = {
         orientation: "h",
