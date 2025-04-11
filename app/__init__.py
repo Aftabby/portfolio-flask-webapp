@@ -2,21 +2,11 @@
 # This file initializes the Flask application and registers the blueprints for different routes.
 # It serves as the entry point for the application.
 
-from flask import Flask, request, redirect, render_template
+from flask import Flask, render_template
 
 
 def create_app():
     app = Flask(__name__)
-    """
-    $ DELETE THE "redirect" block as it has been implemented in the DNS record in CloudFlare.
-    # % Redirect non-www to www globally for all routes
-    @app.before_request
-    def redirect_non_www():
-        if request.host == "aftabby.com":
-            return redirect(
-                request.url.replace("aftabby.com", "www.aftabby.com"), code=301
-            )
-    """
 
     # % For Home Page
     from app.home.routes import (
@@ -30,17 +20,17 @@ def create_app():
 
     app.register_blueprint(shared_bp)
 
-    # % For all the projects - Imports the blueprints list for all projects from projects/__init__.py file and register by iterating over them
-    from app.projects import project_blueprints
-
-    for blueprint in project_blueprints:
-        app.register_blueprint(blueprint)
-
     # % For 404 Error Page
     # Custom error handler for 404 errors
     @app.errorhandler(404)
     def not_found(error):
         return render_template("404.html"), 404
+
+    # % For all the projects - Imports the blueprints list for all projects from projects/__init__.py file and register by iterating over them
+    from app.projects import project_blueprints
+
+    for blueprint in project_blueprints:
+        app.register_blueprint(blueprint)
 
     return app
 
