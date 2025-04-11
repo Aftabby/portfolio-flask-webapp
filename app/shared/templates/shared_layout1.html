@@ -12,6 +12,8 @@
     <!-- Project-specific CSS 
     <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
     -->
+    {% block link %}
+    {% endblock %}
     <link
       rel="icon"
       href="{{ url_for('shared.static', filename='images/favicon.png') }}"
@@ -25,10 +27,9 @@
       rel="stylesheet"
       href="{{ url_for('shared.static', filename='css/shared-mediaqueries1.css') }}"
     />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('ds_salary.static', filename='css/style.css') }}"
-    />
+
+    {% block link %}
+    {% endblock %}
     <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
   </head>
   <body>
@@ -268,7 +269,8 @@ Feature 1 | Feature 2 | Feature 3 | Target
     <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
     ds_salary is the name of the blueprint - specific to a project
     -->
-    <script src="{{ url_for('ds_salary.static', filename='js/script.js') }}"></script>
+    {% block script %}
+    {% endblock %}
     <script src="{{ url_for('shared.static', filename='js/shared-script1.js') }}"></script>
   </body>
 </html>

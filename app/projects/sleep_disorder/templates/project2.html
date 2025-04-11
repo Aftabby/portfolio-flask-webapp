@@ -1,0 +1,237 @@
+<!--
+Using layout templates in Flask (Blueprint-based):
+
+1. To use a shared layout (from app/shared/templates/layout.html):
+   {#% extends 'layout.html' %#}
+
+2. To use a project-specific layout (from app/projects/ds-salary/templates/layout.html):
+   {# % extends 'layout.html' % #}
+
+Note:
+- Flask looks in the current blueprint's template folder first.
+- If two templates have the same name, the one in the current blueprint will be used.
+- To avoid naming conflicts, give shared layouts unique names like 'shared_layout.html'.
+
+Also:
+- Use {#% include 'filename.html' %#} for partials like navbars, headers, or footers.
+- Remove the '#' before using jinja syntax
+-->
+
+{% extends "shared_layout1.html" %}
+
+{% block title %}
+    Project - Aftabby
+{% endblock %}
+
+{% block link %}
+    <!-- Shared CSS 
+    <link rel="stylesheet" href="{{ url_for('shared.static', filename='css/shared-style.css') }}">
+    -->
+    <!-- Project-specific CSS 
+    <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
+    ds_salary is the name of the blueprint - specific to a project
+    -->
+<link
+rel="stylesheet"
+href="{{ url_for('sleep_disorder.static', filename='css/style.css') }}"
+/>
+<link
+rel="stylesheet"
+href="{{ url_for('sleep_disorder.static', filename='css/mediaqueries.css') }}"
+/>
+{%% endblock %}
+
+{% block header %}
+    <h1 class="main-title">Sleep Disorder Prediction</h1>
+    <p>Predict sleep disorders using individual lifestyle and medical data for early risk identification and intervention.</p>
+{% endblock %}
+
+{% block section %}
+
+<section id="introduction">
+    <h2>1. Introduction</h2>
+    <div>
+        <p>
+            Welcome! This data science project analyzes lifestyle and medical factors like age, BMI, and sleep duration.
+            It predicts the presence and type of sleep disorders such as Insomnia or Sleep Apnea.
+            Sleep disorders can seriously impact health and well-being.
+            Early detection enables timely intervention to improve sleep quality and overall health.
+        </p>
+        <p>
+            The applied machine learning models are:
+        <ul>
+            <li>Decision Tree Classifier</li>
+            <li>Random Forest Classifier</li>
+        </ul>
+        </p>
+        <p>
+            To showcase the results, a web application was developed using Flask and deployed within a Docker container. All project files and detailed documentation are available on my <a href="https://github.com/Aftabby/sleep-disorder-project">GitHub profile</a>.
+        </p>
+    </div>
+</section>
+
+<section id="dataset">
+    <h2>2. Dataset</h2>
+    <div>
+        <p>
+            The Sleep Health and Lifestyle Dataset comprises <strong> 400 </strong> rows and <strong> 13 </strong> columns, 
+            covering a wide range of variables related to sleep and daily habits. 
+            It includes details such as gender, age, occupation, sleep duration, quality of sleep, 
+            physical activity level, stress levels, 
+            BMI category, blood pressure, heart rate, daily steps, and the presence or absence of sleep disorders.
+        </p>
+        <p>
+            Below is a sample preview of the dataset:
+        </p>
+        <div class="table-container">
+            {{ context.sample_table | safe }}
+        </div>
+        
+        <p>
+            <h4>Key Features of the Dataset:</h4>
+        <ul>
+            <li>Comprehensive Sleep Metrics: Explore sleep duration, quality, and factors influencing sleep patterns.</li>
+            <li>Lifestyle Factors: Analyze physical activity levels, stress levels, and BMI categories.</li>
+            <li>Cardiovascular Health: Examine blood pressure and heart rate measurements.</li>
+            <li>Sleep Disorder Analysis: Identify the occurrence of sleep disorders such as Insomnia and Sleep Apnea.
+                <ul>
+                    <li>Insomnia: Difficulty falling or staying asleep.</li>
+                    <li>Sleep Apnea: Breathing interruptions during sleep.</li>
+                    <li>None: The individual does not exhibit any specific sleep disorder.</li>
+            </li>
+        </ul>
+        </p>
+    </div>
+</section>
+
+
+
+<section id="methodology">
+    <h2>3. Methodology</h2>
+    <p>The following steps were taken to complete the project:</p>
+    <ol>
+        <li>Data Cleaning</li>
+        <li>Data Preprocessing</li>
+        <li>Exploratory Data Analysis (EDA)</li>
+        <li>Power BI Visualization</li>
+        <li>Model Building and Evaluation</li>
+    </ol>
+</section>
+
+<section id="eda">
+    <h2>4. Exploratory Data Analysis (EDA)</h2>
+    <h4>Key Insight 1: Understanding the data by plotting its variables</h4>
+    <div class="graph-container">
+        <div id="graph1" class="grid-plot"></div>
+    </div>
+    <p>The number of males and females is almost equal, out of which majority of the people
+        have age between 30-45 years. Most of the people have sleep quality greater than 5 which means
+        there are getting sufficient sleep. Moreover, most of the people have normal
+        BMI whci directly relates 
+        with the distribution of sleep disorder which shows equal number of people 
+        with and without sleep disorder.
+    </p>
+
+    <h4>Key Insight 2: Understanding the correlation between individual variables</h4>
+
+    <div class="graph-container">
+        <div id="graph2" class="plot1"></div>
+    </div>
+    <p> <strong>Gender vs Sleep Disorder:</strong> Most of the males and females are not suffering from any sleep disorder. 
+        However females tend to have more sleep disorder as compared to males. 
+        The number of females suffering from Sleep Apnea is quite high as compared to males. 
+        But in contrast to that, 
+        greater number of males are suffering from Insomia as compared to females.
+    </p>
+
+    <div class="graph-container">
+        <div id="graph3" class="plot1"></div>
+    </div>
+    <p><strong>Effect of Occupation on Sleep Disorder:</strong> From the graph it is clear that the occupation 
+        has huge impact on the sleep disorder. Nurses are more subjected to have Sleep Apenea 
+        as compared to other occupations and very few of them have no sleep disorder. 
+        After nurses, the next most affected occupation is the Salesperson, which counts for 
+        the most suffering from Insomia followed by teachers. However there are some occupations 
+        where most of the people have very few instance of Sleep Apenea and Insomia 
+        such as Engineers, Doctors, Accountants, Lawyers. The Software ENgineers and Managers
+         are so less in number so I cannot say much about that, But the occupation Sales 
+        Representative has shown only Sleep Apenea and no Insomia or No sleep disorder.
+    </p>
+    <div class="graph-container">
+        <div id="graph4" class="plot1"></div>
+    </div>
+    <p><strong>BMI and Sleep Disorder:</strong> People with normal BMI are less likely to suffer from any sleep disorder. 
+        However, this is opposite in case of Overweight and Obese people. 
+        Overweight are more likely to suffer more from sleep disordera than Obese people.
+    </p>
+
+</section>
+
+<section id="dashboard">
+    <h2>5. Dashboard</h2>
+    <p>Power BI Interactive Visual Dashboard</p>
+    <p><em>*yet to be embedded*</em></p>
+</section>
+
+<section id="model">
+    <h2>6. Model Building</h2>
+    <p>For predictiong the sleep disorder thriugh classification algorithms the 
+        following machine learning models were used:
+    </p>
+    <ul>
+        <li>Decision Tree Classifier</li>
+        <li>Random Forest Classifier</li>
+    </ul>
+    <p>The best-performing model was <strong>Random Forest Classifier</strong> with a testing accuracy of <strong>89.38%</strong>.
+        <br>
+        The <strong>Decision Tree Classifier</strong> achieved a testing accuracy of <strong>86.73%</strong>.
+    </p>
+    <p>Below is a comparison of the two models:</p>
+
+    <div class="graph-container">
+        <div id="graph5" class="plot1"></div>
+    </div>
+    <div class="graph-container">
+        <div id="graph6" class="plot1"></div>
+    </div>
+
+</section>
+
+<section id="conclusion" class="mb-5">
+    <h2>7. Conclusion</h2>
+    <p>From the exploratory data analysis, I have concluded that the sleep orders depends upon 
+        three main factors of the patient, that are:
+        <ul>
+            <li>Gender</li>
+            <li>Occupation</li>
+            <li>BMI</li>
+        </ul>
+         The males have more instance of Insomia whereas femlaes have more instances of Sleep Apnea. 
+         In addition the that people with occupation such as nurses are more prone to sleep disorders.
+         The BMI of the patient also plays a vital role in the prediction of sleep disorders. 
+        The patients who are either Obese or overweight are more prone to sleep disorders. </p>
+
+</section>
+
+<section id="code" class="mb-5">
+    <h2>8. Code and Repository</h2>
+    <p>All project files and detailed documentation are available on the associated GitHub profile, providing a robust resource for further exploration and application. <a href="https://github.com/Aftabby/sleep-disorder-project" target="_blank">GitHub</a>.</p>
+    <a href="https://github.com/Aftabby/sleep-disorder-project" class="btn" target="_blank">View on GitHub</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <!-- Shared CSS 
+    <link rel="stylesheet" href="{{ url_for('shared.static', filename='css/shared-style.css') }}">
+    -->
+    <!-- Project-specific CSS 
+    <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
+    ds_salary is the name of the blueprint - specific to a project
+    -->
+    
+    <!-- Pass graph_json as a JavaScript variable -->
+<script>
+    var graphData = {{ context.graph_json | safe }};
+</script>
+<script src="{{ url_for('sleep_disorder.static', filename='js/script.js') }}"></script>
+{% endblock %}

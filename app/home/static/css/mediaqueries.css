@@ -112,7 +112,10 @@
   }
   nav {
     justify-content: space-between;
-    margin: 0 5% 5%;
+    margin: 0 5% 1.5%;
+  }
+  #profile {
+    padding-top: 0rem;
   }
 }
 
@@ -133,6 +136,12 @@
     padding: 0rem 0rem 2rem 0rem;
     justify-content: center;
     text-align: justify;
+  }
+  nav {
+    margin: 0 5% 5%;
+  }
+  #profile {
+    padding-top: 4vh;
   }
 }
 

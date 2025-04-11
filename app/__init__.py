@@ -7,7 +7,8 @@ from flask import Flask, request, redirect, render_template
 
 def create_app():
     app = Flask(__name__)
-
+    """
+    $ DELETE THE "redirect" block as it has been implemented in the DNS record in CloudFlare.
     # % Redirect non-www to www globally for all routes
     @app.before_request
     def redirect_non_www():
@@ -15,6 +16,7 @@ def create_app():
             return redirect(
                 request.url.replace("aftabby.com", "www.aftabby.com"), code=301
             )
+    """
 
     # % For Home Page
     from app.home.routes import (

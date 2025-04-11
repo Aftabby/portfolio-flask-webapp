@@ -23,6 +23,20 @@ Also:
     Project - Aftabby
 {% endblock %}
 
+{% block link %}
+    <!-- Shared CSS 
+    <link rel="stylesheet" href="{{ url_for('shared.static', filename='css/shared-style.css') }}">
+    -->
+    <!-- Project-specific CSS 
+    <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
+    ds_salary is the name of the blueprint - specific to a project
+    -->
+<link
+rel="stylesheet"
+href="{{ url_for('ds_salary.static', filename='css/style.css') }}"
+/>
+{%% endblock %}
+
 {% block header %}
     <h1 class="main-title"> Data Scientists Salary Prediction </h1>
     <p> Scraping data from Glassdoor and building a model to predict salaries for various roles of data scientists. </p>
@@ -149,11 +163,20 @@ Also:
     <p>All project files and detailed documentation are available on the associated GitHub profile, providing a robust resource for further exploration and application. <a href="https://github.com/Aftabby/ds-salary-project" target="_blank">GitHub</a>.</p>
     <a href="https://github.com/Aftabby/ds-salary-project" class="btn" target="_blank">View on GitHub</a>
 </section>
+{% endblock %}
 
-
-<!-- Pass graph_json as a JavaScript variable -->
+{% block script %}
+    <!-- Shared CSS 
+    <link rel="stylesheet" href="{{ url_for('shared.static', filename='css/shared-style.css') }}">
+    -->
+    <!-- Project-specific CSS 
+    <link rel="stylesheet" href="{{ url_for('ds_salary.static', filename='css/custom.css') }}">
+    ds_salary is the name of the blueprint - specific to a project
+    -->
+    <!-- Pass graph_json as a JavaScript variable -->
 <script>
     var graphData = {{ context.graph_json | safe }};
 </script>
+<script src="{{ url_for('ds_salary.static', filename='js/script.js') }}"></script>
 
 {% endblock %}
