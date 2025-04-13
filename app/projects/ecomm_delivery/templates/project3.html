@@ -1,0 +1,332 @@
+<!--
+Using layout templates in Flask (Blueprint-based):
+
+1. To use a shared layout (from app/shared/templates/layout.html):
+   {#% extends 'layout.html' %#}
+
+2. To use a project-specific layout (from app/projects/ds-salary/templates/layout.html):
+   {# % extends 'layout.html' % #}
+
+Note:
+- Flask looks in the current blueprint's template folder first.
+- If two templates have the same name, the one in the current blueprint will be used.
+- To avoid naming conflicts, give shared layouts unique names like 'shared_layout.html'.
+
+Also:
+- Use {#% include 'filename.html' %#} for partials like navbars, headers, or footers.
+- Remove the '#' before using jinja syntax
+-->
+
+{% extends "shared_layout1.html" %}
+<!-- {#% extends "layout.html" %#} -->
+
+{% block title %}
+    Project - Aftabby
+{% endblock %}
+
+{% block link %}
+    <!-- Shared CSS --> 
+    <!-- {# <link rel="stylesheet" href="{{# url_for('shared.static', filename='css/shared-style.css') #}}"> #} -->
+    
+    <!-- Project-specific CSS -->
+    <!-- {# <link rel="stylesheet" href="{{# url_for('ds_salary.static', filename='css/custom.css') #}}"> #} -->
+    <!-- {# ds_salary is the name of the blueprint - specific to a project #} -->
+
+    <!-- REMOVE ALL THE "#" symbol BEFORE USING JINJA SYNTAX-->
+    
+<link
+rel="stylesheet"
+href="{{ url_for('ecomm_delivery.static', filename='css/style.css') }}"
+/>
+<link
+rel="stylesheet"
+href="{{ url_for('ecomm_delivery.static', filename='css/mediaqueries.css') }}"
+/>
+{% endblock %}
+
+{% block header %}
+    <h1>E-Commerce Product Delivery Prediction</h1>
+    <p>Whether the product from an e-commerce company will reach on time or not, also analyze various factors that affect the delivery of the product as well as study the customer behavior.</p>
+{% endblock %}
+
+{% block section %}
+
+<section id="introduction">
+    <h2>1. Introduction</h2>
+    <div>
+        <p>
+            Welcome! An international e-commerce company based wants to discover key insights 
+            from their customer database. They want to use some of the most advanced machine learning 
+            techniques to study their customers. The company sells electronic products.
+        </p>
+        <p>
+            The applied machine learning models are:
+        <ul>
+            <li>Random Forest Classifier</li>
+            <li>Decision Tree Classifier</li>
+            <li>Logistic Regression</li>
+            <li>K Nearest Neighbors Classifier</li>
+
+        </ul>
+        </p>
+        <p>
+            To showcase the results, a web application was developed using Flask and deployed within a Docker container. All project files and detailed documentation are available on my <a href="https://github.com/Aftabby/ecomm-delivery-project">GitHub profile</a>.
+        </p>
+    </div>
+</section>
+
+<section id="dataset">
+    <h2>2. Dataset</h2>
+    <div>
+        <p>
+            The dataset used for model building contained <strong> 10,999 </strong> observations 
+            of <strong> 12 </strong> variables.
+</p>    </p>
+        <p>
+            Below is a sample preview of the dataset:
+        </p>
+        <div class="table-container">
+            {{ context.sample_table | safe }}
+        </div>
+    </div>
+</section>
+
+
+
+<section id="methodology">
+    <h2>3. Methodology</h2>
+    <p>The following steps were taken to complete the project:</p>
+    <ol>
+        <li>Data Cleaning</li>
+        <li>Data Preprocessing</li>
+        <li>Exploratory Data Analysis (EDA)</li>
+        <li>Power BI Visualization</li>
+        <li>Model Building and Evaluation</li>
+    </ol>
+</section>
+
+<section id="eda">
+
+    <h2>4. Exploratory Data Analysis (EDA)</h2>
+    <h4>Key Insight: Customer Gender Distribution</h4>
+    <div id="graph-container">
+        <div id="graph1"></div>
+    </div>
+    <p>The dataset has the equal number of both males and female customers, 
+        with percentage of <strong>49.6%</strong> and <strong>50.4%</strong> respectively.
+    </p>
+
+    <h4>Key Insight: Product Properties</h4>
+    <div id="graph-container">
+        <div id="graph2"></div>
+    </div>
+    <p> These three graphs explain the distribution of product properties - Weight, Cost and Importance 
+        in the dataset. Firstly, looking at the weight distribution, we can see that the products weighing 
+        between <strong>1000-2000</strong> grams and <strong>4000-6000</strong> grams are more in number. This means that the company is 
+        selling more of the products in these weight ranges. The second graph is about the product importance, 
+        where majority of the products have low or medium importance. 
+        The third graph is about the cost of the product. Third graph is about the cost distribution 
+        of the products, where there is increased distribution between <strong>150-200</strong> and
+        <strong>225-275</strong> dollars.
+        <br> <br>
+        From this, I conclude that majority of the products are lighter than <strong>6000</strong> grams, 
+        have low or medium importance and costs between <strong>150-275</strong> dollars.
+    </p>
+
+    <h4>Key Insight: Logistics</h4>
+    <div id="graph-container">
+        <div id="graph3"></div>
+    </div>
+    <p>The above graphs visualizes the logistics and delivery of the product. 
+        In the first graph, we can see that the number of products from warehouse <strong>F</strong> is most
+        i.e. <strong>3500</strong>, whereas rest of the warehouses have nearly equal number of products. 
+        The second graph is about the shipment of the product, where majority of the 
+        products are shipped via Ship whereas nearly <strong>2000</strong> products are shipped by 
+        flight and road. Third graph is about the timely delivery of the product where
+        we can see that the number of products delivered on time is more than the number
+        of products not delivered on time.
+        <br> <br>
+        From all the above graph, I assume that warehouse <strong>F</strong> is close to seaport, 
+        because warehouse <strong>F</strong> has the most number of products and most of the products are shipped via ship.
+    </p>
+
+    <h4>Key Insight: Customer Experience</h4>
+    <div id="graph-container">
+        <div id="graph4"></div>
+    </div>
+    <p>The above graphs visualizes the customer experience based on their 
+        customer care calls, rating, prior purchases and discount offered. 
+        The first graph shows the number of customer care calls done by 
+        the customers, where we can see that majority of the customers have 
+        done <strong>3-4</strong> calls, which could be a potential indicator, which shows that 
+        customers could be facing with the product delivery. In the second graph, 
+        we can see that the count of customer ratings across all ratings is same, 
+        but there are little more count in rating <strong>1</strong>, which means customers are not 
+        satisfied with the service.
+        <br> <br>
+        The third graph is about the prior purchases done by the customers, 
+        where we can see that majority of the customers have done <strong>2-3</strong> prior purchases, 
+        which means that customers who are having prior purchases, they are 
+        satisfied with the service, and they are buying more products. The fourth graph 
+        is about the discount offered on the products, where we can see that majority 
+        of the products have <strong>0-10%</strong> discount, which means that the company is not 
+        offering much discount on the products.
+    </p>
+
+    <h4>Key Insight: Customer Gender and Product Delivery</h4>
+    <div id="graph-container">
+        <div id="graph5"></div>
+    </div>
+    <p>The number of products timely delivered for both the genders is same, 
+        which means there is no relation of customer gender and product delivery.
+    </p>
+
+    <h4>Key Insight: Product Properties and Product Delivery</h4>
+    <div id="graph-container">
+        <div id="graph6"></div>
+    </div>
+    <p>The above plots visualizes the relationship between product properties 
+        and product delivery. From the first graph, it is quite clear that product
+        weight has an impact of timely delivery of the product. Products that weight
+        more than <strong>4500</strong> grams are not delivered on time, in addition to that more 
+        products that weight between <strong>2500 - 3500</strong> grams are delivered timely. 
+        The second graph is about the product importance and product delivery, 
+        where we can see that there is no major difference between the product 
+        delivery based on the product importance. The third graph shows the 
+        relationship between the cost of the product and product delivery, 
+        where we can see that products that cost more than <strong>250</strong> dollars have higher 
+        count of not delivered on time.
+        <br> <br>
+        From this I conclude that product weight and cost has an impact on the product delivery.
+    </p>
+
+    <h4>Key Insight: Logistics and Product Delivery</h4>
+    <div id="graph-container">
+        <div id="graph7"></div>
+    </div>
+    <p>These graphs explain the relationship between the Logistic and timely delivery of the product. 
+        Since most of the products are shipped from warehouse <strong>F</strong>, I assumed that
+        warehouse <strong>F</strong> is close to seaport, and most of the products are shipped 
+        via ship. In both the graphs, the difference between the number of products
+        delivered on time and not delivered on time is constant across all the 
+        warehouse blocks and mode of shipment. <br>
+        This means that the logistic and mode of shipment has no impact on the product delivery.
+    </p>
+
+    <h4>Key Insight: Customer Experience and Product Delivery</h4>
+    <div id="graph-container">
+        <div id="graph8"></div>
+    </div>
+    <p>It is important to understand the customer experience and respond to 
+        services provided by the E-Commerce company. The above graphs explain
+        the relationship between customer experience and product delivery. 
+        The first graph is about the customer care calls and product delivery, 
+        where we that the difference in timely and late delivery of the product
+        decreases with increase in the number of calls by the customer, which 
+        means that with the delay in product delivery the customer gets anxious
+        about the product and calls the customer care. The second graph is 
+        about the customer rating and product delivery, where we can see that
+        customers who rating have higher count of products delivered on time.
+        <br> <br>
+        The third graph is about the customer's prior purchase, 
+        which also shows that customers who have done more prior 
+        purchases have higher count of products delivered on time 
+        and this is the reason that they are purchasing again from 
+        the company. The fourth graph is about the discount offered 
+        on the product and product delivery, where we can see that 
+        products that have <strong>0-10%</strong> discount have higher count of products
+        delivered late, whereas products that have discount more than 
+        <strong>10%</strong> have higher count of products delivered on time.
+    </p>
+
+    <h4>Key Insight: Customer Concern</h4>
+    <div id="graph-container">
+        <div id="graph9"></div>
+    </div>
+    <p>It is clear that customer are more concern regarding the delivery 
+        of the product when the cost of the product is high. This is the 
+        reason that they call the customer care to know the status of the 
+        product. So, it is important to make sure the delivery of the product 
+        is on time when the cost of the product is high.
+    </p>
+</section>
+
+<section id="dashboard">
+    <h2>5. Dashboard</h2>
+    <p>Power BI Interactive Visual Dashboard</p>
+    <p><em>*yet to be embedded*</em></p>
+</section>
+
+<section id="model">
+    <h2>6. Model Building</h2>
+    <p>For predictiong the sleep disorder thriugh classification algorithms the 
+        following machine learning models were used:
+    </p>
+    <ul>
+        <li>Random Forest Classifier</li>
+        <li>Decision Tree Classifier</li>
+        <li>Logistic Regression</li>
+        <li>K Nearest Neighbors Classifier</li>
+    </ul>
+    <p>Below is a accuracy level comparison of the four models:</p>
+
+    <div id="graph-container">
+        <div id="graph10"></div>
+    </div>
+</section>
+
+<section id="conclusion" class="mb-5">
+    <h2>7. Conclusion</h2>
+    <p>
+        The aim of the project was to predict whether the product from an e-commerce
+        company will reach on time or not. This project also analyzes various factors
+        that affect the delivery of the product as well as studies the customer behavior.
+        From the exploratory data analysis, I found that the product weight and cost
+        has an impact on the product delivery. Where product that weighs between 
+        <strong>2500 - 3500</strong> grams and having cost less than <strong>250</strong> dollars 
+        had higher rate 
+        of being delivered on time. Most of the products were shipped from 
+        warehouse <strong>F</strong> though ship, so it is quite possible that warehouse <strong>F</strong> 
+        is close to a seaport.
+        <br> <br>
+        The customer's behaviour also help in predicting the timely delivery of the 
+        product. The more the customer calls, higher the chances the product delivery 
+        is delayed. Interestingly, the customers who have done more prior purchases 
+        have higher count of products delivered on time and this is the reason that 
+        they are purchasing again from the company. The products that have <strong>0-10%</strong> discount
+        have higher count of products delivered late, whereas products that have discount
+        more than <strong>10%</strong> have higher count of products delivered on time.
+        <br> <br>
+        Coming to the machine learning models, the decision tree classifier as the 
+        highest accuracy among the other models, with accuracy of <strong>69%</strong>. The random forest
+        classifier and logistic regression had accuracy of <strong>68%</strong> and <strong>67%</strong> respectively. 
+        The K Nearest Neighbors had the lowest accuracy of <strong>65%</strong>.
+    </p>
+
+</section>
+
+<section id="code" class="mb-5">
+    <h2>8. Code and Repository</h2>
+    <p>All project files and detailed documentation are available on the associated GitHub profile, providing a robust resource for further exploration and application. <a href="https://github.com/Aftabby/ecomm-delivery-project" target="_blank">GitHub</a>.</p>
+    <a href="https://github.com/Aftabby/ecomm-delivery-project" class="btn" target="_blank">View on GitHub</a>
+</section>
+{% endblock %}
+
+{% block script %}
+    <!-- Shared CSS --> 
+    <!-- {# <link rel="stylesheet" href="{{# url_for('shared.static', filename='css/shared-style.css') #}}"> #} -->
+    
+    <!-- Project-specific CSS -->
+    <!-- {# <link rel="stylesheet" href="{{# url_for('ds_salary.static', filename='css/custom.css') #}}"> #} -->
+    <!-- {# ds_salary is the name of the blueprint - specific to a project #} -->
+
+    <!-- REMOVE ALL THE "#" symbol BEFORE USING JINJA SYNTAX-->
+    
+    
+    
+    <!-- Pass graph_json as a JavaScript variable -->
+<script>
+    var graphData = {{ context.graph_json | safe }};
+</script>
+<script src="{{ url_for('ecomm_delivery.static', filename='js/script.js') }}"></script>
+{% endblock %}

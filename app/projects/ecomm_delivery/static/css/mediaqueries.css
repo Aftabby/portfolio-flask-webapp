@@ -1,0 +1,33 @@
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+  .table-container {
+    padding: 0;
+    margin: 10px 0;
+  }
+
+  .table-container table {
+    font-size: 12px; /* Smaller font for mobile */
+    min-width: 500px; /* Adjust min-width for smaller screens */
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 8px 12px; /* Reduced padding */
+  }
+
+  .table-container .code-block table {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .table-container table {
+    font-size: 10px;
+    min-width: 400px;
+  }
+
+  .table-container th,
+  .table-container td {
+    padding: 6px 8px;
+  }
+}

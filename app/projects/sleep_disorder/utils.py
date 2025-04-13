@@ -22,7 +22,6 @@ def load_sample():
         os.path.dirname(__file__), "static", "data", "cleaned_sleep_dataset.csv"
     )
     df = pd.read_csv(path)
-    df = pd.read_csv(path)
     df["Sleep Disorder"] = df["Sleep Disorder"].fillna("None")
     return df
 

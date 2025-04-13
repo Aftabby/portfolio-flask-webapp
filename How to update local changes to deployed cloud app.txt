@@ -13,9 +13,15 @@ To implement changes in your files, **rebuild the Docker image**, and deploy the
 #### 2. **Rebuild the Docker Image**
 
 After you’ve made your changes, rebuild the Docker image using the same **`docker build`** command, which will automatically include all your new changes:
-
+If you’re deploying **multiple updates** in the future, you can tag the Docker image with **versioning** for better management, e.g.,
 ```bash
 docker build -t yourusername/your-app-name .
+docker build -t aftabby/aftabby-webapp .
+
+OR
+
+docker build -t yourusername/your-app-name:v2 .
+docker build -t aftabby/aftabby-webapp:v2 .
 ```
 
 This will rebuild the Docker image locally with all your updated code. The tag (`yourusername/your-app-name`) should match the name you used when pushing the image to Docker Hub earlier.
@@ -28,6 +34,13 @@ Once the image is built, push it to **Docker Hub** or whichever container regist
 
 ```bash
 docker push yourusername/your-app-name
+docker push aftabby/aftabby-webapp
+
+OR
+
+docker push yourusername/your-app-name:v2
+docker push aftabby/aftabby-webapp:v2
+
 ```
 
 This will upload the newly built image to Docker Hub (or your chosen container registry). Make sure it uses the same tag (`yourusername/your-app-name`) as before so Azure knows to pull the updated image.
@@ -45,6 +58,28 @@ az containerapp update \
   --name my-portfolio-app \
   --resource-group my-portfolio-rg \
   --image yourusername/your-app-name
+
+az containerapp update \
+  --name aftabby-webapp \
+  --resource-group aftabby-webapp-rg \
+  --image aftabby/aftabby-webapp
+
+
+OR
+
+az containerapp update \
+  --name my-portfolio-app \
+  --resource-group my-portfolio-rg \
+  --image yourusername/your-app-name:v2
+
+az containerapp update \
+  --name aftabby-webapp \
+  --resource-group aftabby-webapp-rg \
+  --image aftabby/aftabby-webapp:v2
+
+
+
+
 ```
 
 This command will tell Azure to pull the latest Docker image from Docker Hub (or your container registry) and replace the currently running container with the new one.
